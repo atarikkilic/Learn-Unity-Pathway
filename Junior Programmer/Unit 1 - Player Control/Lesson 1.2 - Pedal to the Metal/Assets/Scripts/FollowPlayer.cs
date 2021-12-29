@@ -18,6 +18,7 @@ public class FollowPlayer : MonoBehaviour
     {
         // camera's current transform position set that to
         // the current position of our player's transform component
-        transform.position = player.transform.position;
+        // Offset the camera behind the player by adding to the player's position
+        transform.position = player.transform.position + new Vector3(0.01f, 4.4f, -7.2f);
     }
 }
