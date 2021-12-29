@@ -17,7 +17,9 @@ public class FollowPlayer : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+
+    // LateUpdate for will then move our camera after the vehicle is moved.
+    void LateUpdate()
     {
         // camera's current transform position set that to
         // the current position of our player's transform component
