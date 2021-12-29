@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
 {   
-
+    // Get a reference to an object in the scene for another object to use
     public GameObject player;
+
+    // create a variable for accessing the offset
+    private Vector3 offset = new Vector3(0.01f, 4.4f, -7.2f);
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +22,6 @@ public class FollowPlayer : MonoBehaviour
         // camera's current transform position set that to
         // the current position of our player's transform component
         // Offset the camera behind the player by adding to the player's position
-        transform.position = player.transform.position + new Vector3(0.01f, 4.4f, -7.2f);
+        transform.position = player.transform.position + offset ;
     }
 }
