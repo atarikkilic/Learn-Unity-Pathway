@@ -5,14 +5,17 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // add a speed variable for vehicle, we can change the vehicle's speed
-    // allow it to be accessed from the inspector
-    public float speed = 5.0f;
+    
+    private float speed = 20.0f;
 
     // Create the turnSpeed variable
-    public float turnSpeed;
+    private float turnSpeed = 45.0f;
 
     // Create the horizontal input variable for direction
-    public float horizontalInput;
+    private float horizontalInput;
+
+    // Create the vertical input variable for control of the vehicle speed
+    private float verticalInput;
 
     // Start is called before the first frame update
     void Start()
@@ -24,17 +27,25 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // Get the axis that's horizontal  so we can get those left and right arrow keys
-
         horizontalInput = Input.GetAxis("Horizontal");
+
+        // Get the axis that's vertical so we can get those up and down arrow keys
+        verticalInput = Input.GetAxis("Vertical");
 
         // We'll move the vehicle forward
         //transform.Translate(0, 0, 1);
         //transform.Translate(Vector3.forward );
         //transform.Translate(Vector3.forward * Time.deltaTime * 20);
 
-        transform.Translate(Vector3.forward * Time.deltaTime * speed);
-        
-        transform.Translate(Vector3.right * Time.deltaTime * turnSpeed * horizontalInput);
+        // Moves the car forward based on vertical input
+
+        transform.Translate(Vector3.forward * Time.deltaTime * speed * verticalInput);
+
+        //transform.Translate(Vector3.right * Time.deltaTime * turnSpeed * horizontalInput);
+
+        // Rotates the car based on horizontal input
+
+        transform.Rotate(Vector3.up, Time.deltaTime * turnSpeed * horizontalInput);
 
 
     }
