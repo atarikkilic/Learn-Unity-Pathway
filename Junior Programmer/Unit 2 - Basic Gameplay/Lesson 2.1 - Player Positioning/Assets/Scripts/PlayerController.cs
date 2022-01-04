@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
 
     // Declare variable for keep the player inbounds
     public float xRange = 10.0f;
+
+    // Create a game object variable projectile prefab
+    public GameObject projectilePrefab;
     // Start is called before the first frame update
     void Start()
     {
