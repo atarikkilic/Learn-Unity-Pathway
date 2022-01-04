@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 424167693769990522}
   - component: {fileID: 424167693768860602}
   - component: {fileID: 424167693770898392}
+  - component: {fileID: 4755448307360843711}
   m_Layer: 0
   m_Name: Food_Pizza_01
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 424167693770866042}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 2.61}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
@@ -95,3 +96,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedPizza: 40
+--- !u!114 &4755448307360843711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424167693770866042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c776af9c978db840a2761e1c4612a1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
