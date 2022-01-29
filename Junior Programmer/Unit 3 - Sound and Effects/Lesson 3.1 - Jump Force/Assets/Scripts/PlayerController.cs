@@ -6,17 +6,21 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
     private Animator playerAnim;
+    private AudioSource playerAudio;
     public float jumpForce = 10.0f;
     public float gravityModifier;
     public bool isOnGround = true;
     public bool gameOver = false;
     public ParticleSystem explosionParticle;
     public ParticleSystem dirtParticle;
+    public AudioClip jumpSound;
+    public AudioClip crashSound;
     // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         playerAnim = GetComponent<Animator>();
+        playerAudio = GetComponent<AudioSource>();
         Physics.gravity *= gravityModifier;
     }
 
@@ -33,6 +37,8 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetTrigger("Jump_trig");
             // When we jump stop dirt particle
             dirtParticle.Stop();
+            // Play soundfx when player jump
+            playerAudio.PlayOneShot(jumpSound, 0.5f);
         }
     }
     // After jumping and returning to the ground, we set it to true with the collider
@@ -55,6 +61,8 @@ public class PlayerController : MonoBehaviour
             explosionParticle.Play();
             // Stop the dirt particle
             dirtParticle.Stop();
+            // Play soundfx when player die
+            playerAudio.PlayOneShot(crashSound, 0.8f);
         }
         
     }
