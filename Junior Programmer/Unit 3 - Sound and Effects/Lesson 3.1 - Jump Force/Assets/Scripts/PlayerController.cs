@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     public float gravityModifier;
     public bool isOnGround = true;
     public bool gameOver = false;
+    public ParticleSystem explosionParticle;
+    public ParticleSystem dirtParticle;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +31,8 @@ public class PlayerController : MonoBehaviour
             isOnGround = false;
             // Get triggered Animator's paramater Jump_trig
             playerAnim.SetTrigger("Jump_trig");
+            // When we jump stop dirt particle
+            dirtParticle.Stop();
         }
     }
     // After jumping and returning to the ground, we set it to true with the collider
@@ -37,6 +41,8 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isOnGround = true;
+            // Play dirt particle when player on ground
+            dirtParticle.Play();
         }
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
@@ -45,6 +51,10 @@ public class PlayerController : MonoBehaviour
             // Acces to animator layers' conditions of death and set the values
             playerAnim.SetBool("Death_b", true);
             playerAnim.SetInteger("DeathType_int", 1);
+            // Start the explosion particle
+            explosionParticle.Play();
+            // Stop the dirt particle
+            dirtParticle.Stop();
         }
         
     }
