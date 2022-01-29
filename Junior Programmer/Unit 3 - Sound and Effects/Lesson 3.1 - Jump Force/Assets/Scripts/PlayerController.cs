@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
+        if (Input.GetKeyDown(KeyCode.Space) && isOnGround && !gameOver)
         {
             //ForceMode.Impulse - Applies an instant force on the Object, taking mass into account.
             //This pushes the Object using the entire force in a single frame.
@@ -42,6 +42,9 @@ public class PlayerController : MonoBehaviour
         {
             gameOver = true;
             Debug.Log("Game Over !!!");
+            // Acces to animator layers' conditions of death and set the values
+            playerAnim.SetBool("Death_b", true);
+            playerAnim.SetInteger("DeathType_int", 1);
         }
         
     }
