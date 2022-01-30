@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerControllerX : MonoBehaviour
 {
     public bool gameOver = false;
-
+    private bool isLowEnoughth;
     public float floatForce;
     private float gravityModifier = 1.5f;
     private Rigidbody playerRb;
@@ -16,7 +16,7 @@ public class PlayerControllerX : MonoBehaviour
     private AudioSource playerAudio;
     public AudioClip moneySound;
     public AudioClip explodeSound;
-
+    private RepeatBackgroundX repeatBackgroundScript;
 
     // Start is called before the first frame update
     void Start()
@@ -28,16 +28,28 @@ public class PlayerControllerX : MonoBehaviour
         // Apply a small upward force at the start of the game
         playerRb.AddForce(Vector3.up * 5, ForceMode.Impulse);
 
+        repeatBackgroundScript = GameObject.Find("Background").GetComponent<RepeatBackgroundX>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        //check are we low enoughth?
+        if (transform.position.y > repeatBackgroundScript.backgroundHeight)
+        {
+            isLowEnoughth = false;
+            playerRb.velocity = Vector3.zero;
+        }
+
+        else
+        { isLowEnoughth = true; }
         // While space is pressed and player is low enough, float up
-        if (Input.GetKey(KeyCode.Space) && !gameOver)
+        if (Input.GetKey(KeyCode.Space) && !gameOver && isLowEnoughth)
         {
             playerRb.AddForce(Vector3.up * floatForce, ForceMode.Acceleration);
         }
+
     }
 
     private void OnCollisionEnter(Collision other)

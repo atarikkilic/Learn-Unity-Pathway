@@ -7,10 +7,13 @@ public class RepeatBackgroundX : MonoBehaviour
     private Vector3 startPos;
     private float repeatWidth;
 
+    public float backgroundHeight;
+
     private void Start()
     {
         startPos = transform.position; // Establish the default starting position 
         repeatWidth = GetComponent<BoxCollider>().size.x / 2; // Set repeat width to half of the background
+        backgroundHeight = GetComponent<BoxCollider>().size.y - 4.5f;
     }
 
     private void Update()
