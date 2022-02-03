@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private GameObject focalPoint;
     private float powerupStrength = 15.0f;
     public float speed = 5.0f;
+    public GameObject powerupIndicator;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,15 +23,27 @@ public class PlayerController : MonoBehaviour
         float forwardInput = Input.GetAxis("Vertical");
         playerRb.AddForce(focalPoint.transform.forward * forwardInput * speed);
         //playerRb.AddForce(Vector3.forward * forwardInput * speed);
+        powerupIndicator.gameObject.transform.position = transform.position + new Vector3(0, -0.5f, 0);
     }
     // Destroy the power-up when player collected the power-up
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Powerup"))
         {
+            powerupIndicator.gameObject.SetActive(true);
             hasPowerup = true;
             Destroy(other.gameObject);
+            // We're going to start a coroutine which will actually start that thread
+            StartCoroutine(PowerupCountdownRoutine());
         }
+    }
+    // Ienumerator is going to create a new thread and it will use the waitforseconds method to wait for seven seconds before we do something
+    //  Outside of our update loop
+    IEnumerator PowerupCountdownRoutine()
+    {
+        yield return new WaitForSeconds(7);
+        hasPowerup = false;
+        powerupIndicator.gameObject.SetActive(false);
     }
 
     private void OnCollisionEnter(Collision collision)
