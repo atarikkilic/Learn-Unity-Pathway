@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public bool hasPowerup = false;
     private Rigidbody playerRb;
     private GameObject focalPoint;
     public float speed = 5.0f;
@@ -20,5 +21,14 @@ public class PlayerController : MonoBehaviour
         float forwardInput = Input.GetAxis("Vertical");
         playerRb.AddForce(focalPoint.transform.forward * forwardInput * speed);
         //playerRb.AddForce(Vector3.forward * forwardInput * speed);
+    }
+    // Destroy the power-up when player collected the power-up
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Powerup"))
+        {
+            hasPowerup = true;
+            Destroy(other.gameObject);
+        }
     }
 }
