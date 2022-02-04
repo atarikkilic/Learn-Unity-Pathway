@@ -21,5 +21,10 @@ public class Enemy : MonoBehaviour
         // Normalize that entire vector,so that way it doesn't increase in magnitude the farther the two objects are away
         Vector3 lookDirection = (player.transform.position - transform.position).normalized;
         enemyRb.AddForce(lookDirection * speed);
+        // Destroy the enemies when they fall of
+        if(transform.position.y < -10)
+        {
+            Destroy(gameObject);
+        }
     }
 }
