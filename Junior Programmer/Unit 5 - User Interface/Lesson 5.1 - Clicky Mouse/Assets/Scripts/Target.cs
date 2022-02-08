@@ -10,11 +10,16 @@ public class Target : MonoBehaviour
     private float maxTorque = 10;
     private float xRange = 4;
     private float ySpawnPos = -6;
+    // Create a reference for our Game Manager
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
         targetRb = GetComponent<Rigidbody>();
+        // find that game manager specifically the game object that's already in our scene
+        // and we're going to get the component of its game manager script
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
         targetRb.AddForce(RandomForce(), ForceMode.Impulse);
         // Torque will apply the force for our objects to rotate
@@ -33,6 +38,7 @@ public class Target : MonoBehaviour
     private void OnMouseDown()
     {
         Destroy(gameObject);
+        gameManager.UpdateScore(5);
     }
 
     // When one of our objects enters the trigger for that sensor, we can destroy it.
