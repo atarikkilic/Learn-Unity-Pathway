@@ -13,6 +13,10 @@ public class Target : MonoBehaviour
     // Create a reference for our Game Manager
     private GameManager gameManager;
 
+    public int pointValue;
+
+    public ParticleSystem explosionParticle;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,7 +42,10 @@ public class Target : MonoBehaviour
     private void OnMouseDown()
     {
         Destroy(gameObject);
-        gameManager.UpdateScore(5);
+        // set it to the current position of what our game object is at
+        // and make sure the rotation is the same as the actual explosion particle.
+        Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+        gameManager.UpdateScore(pointValue);
     }
 
     // When one of our objects enters the trigger for that sensor, we can destroy it.
