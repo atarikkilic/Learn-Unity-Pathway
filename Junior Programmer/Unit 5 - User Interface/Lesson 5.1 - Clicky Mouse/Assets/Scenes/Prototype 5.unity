@@ -354,6 +354,7 @@ MonoBehaviour:
   - {fileID: 4117806673133393819, guid: 333c071e116b13a40802778eae7b913d, type: 3}
   scoreText: {fileID: 1818033161}
   gameOverText: {fileID: 1690532285}
+  restartButton: {fileID: 1784897767}
   isGameActive: 0
 --- !u!4 &406541946
 Transform:
@@ -957,7 +958,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1784897766
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1021,7 +1022,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1784897768}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 406541945}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: RestartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1784897768
 MonoBehaviour:
   m_ObjectHideFlags: 0
