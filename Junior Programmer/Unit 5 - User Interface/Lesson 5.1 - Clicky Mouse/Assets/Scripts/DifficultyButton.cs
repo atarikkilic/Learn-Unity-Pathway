@@ -5,14 +5,19 @@ using UnityEngine.UI;
 
 public class DifficultyButton : MonoBehaviour
 {
+    private GameManager gameManager;
     private Button button;
+
+    public int difficulty;
     // Start is called before the first frame update
     void Start()
     {
         button = GetComponent<Button>();
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+
         // We call this adding a listener,so that way it pays attention for when a certain event has happened.
-        // In this case, a click event.
-        // And then, we can just use a method to pass into our listener so we can actually just use our SetDifficulty.
+        // Add a listener to your button, for the onClick event, and when the button is clicked,
+        // it'll go into the SetDifficulty method, and it should trigger this message in your console.
         button.onClick.AddListener(SetDifficulty);
     }
 
@@ -25,5 +30,6 @@ public class DifficultyButton : MonoBehaviour
     void SetDifficulty()
     {
         Debug.Log(button.gameObject.name + " was clicked");
+        gameManager.StartGame(difficulty);
     }
 }
