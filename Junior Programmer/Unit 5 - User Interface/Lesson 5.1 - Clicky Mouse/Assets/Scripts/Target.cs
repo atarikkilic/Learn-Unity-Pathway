@@ -41,17 +41,24 @@ public class Target : MonoBehaviour
     // When mouse button 1 is clicked destroy the objects
     private void OnMouseDown()
     {
-        Destroy(gameObject);
-        // set it to the current position of what our game object is at
-        // and make sure the rotation is the same as the actual explosion particle.
-        Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
-        gameManager.UpdateScore(pointValue);
+        if (gameManager.isGameActive)
+        {
+            Destroy(gameObject);
+            // set it to the current position of what our game object is at
+            // and make sure the rotation is the same as the actual explosion particle.
+            Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+            gameManager.UpdateScore(pointValue);
+        }
     }
 
     // When one of our objects enters the trigger for that sensor, we can destroy it.
     private void OnTriggerEnter(Collider other)
     {
         Destroy(gameObject);
+        if (!gameObject.CompareTag("Bad"))
+        {
+            gameManager.GameOver();
+        }
     }
 
     Vector3 RandomForce()
