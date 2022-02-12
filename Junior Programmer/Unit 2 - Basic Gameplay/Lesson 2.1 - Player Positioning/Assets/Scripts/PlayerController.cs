@@ -1,46 +1,49 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Create the horizontal input variable to move the Player left-to-right
-    public float horizontalInput;
-    public float speed = 10.0f;
-
-    // Declare variable for keep the player inbounds
-    public float xRange = 10.0f;
-
-    // Create a game object variable projectile prefab
+    private float horizontalInput;
+    private float speed = 20.0f;
+    private float xRange = 20;
     public GameObject projectilePrefab;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
 
     // Update is called once per frame
     void Update()
     {
-        // Keep the player inbounds
-        if (transform.position.x <= -xRange)
+        // Check for left and right bounds
+        if (transform.position.x < -xRange)
         {
             transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
         }
-        if (transform.position.x >= xRange)
+
+        if (transform.position.x > xRange)
         {
             transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
         }
 
+        // Player movement left to right
         horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.right * Time.deltaTime * speed * horizontalInput);
 
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            // Launch a projectile from the player
+            // No longer necessary to Instantiate prefabs
+            // Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
 
-            // Instantiate is for creating copies of objects that already exist
-            Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+            // Get an object object from the pool
+            GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledObject();
+            if (pooledProjectile != null)
+            {
+                pooledProjectile.SetActive(true); // activate it
+                pooledProjectile.transform.position = transform.position; // position it at player
+            }
         }
+
+
+
     }
 }
