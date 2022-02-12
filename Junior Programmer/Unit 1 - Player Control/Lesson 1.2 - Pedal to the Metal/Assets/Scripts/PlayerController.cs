@@ -10,6 +10,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject centerOfMass;
     [SerializeField] TextMeshProUGUI speedometerText;
     [SerializeField] float speed;
+    [SerializeField] TextMeshProUGUI rpmText;
+    [SerializeField] float rpm;
+    [SerializeField] List<WheelCollider> allWheels;
+    [SerializeField] int wheelsOnGround;
     // add a speed variable for vehicle, we can change the vehicle's speed
 
     //[SerializeField] private const float speed = 20.0f;
@@ -44,6 +48,9 @@ public class PlayerController : MonoBehaviour
         //transform.Translate(Vector3.forward );
         //transform.Translate(Vector3.forward * Time.deltaTime * 20);
 
+
+        if (IsOnGround())
+        {                  
         // Moves the car forward based on vertical input
 
         playerRb.AddRelativeForce(Vector3.forward * horsePower * verticalInput);
@@ -57,5 +64,29 @@ public class PlayerController : MonoBehaviour
         
         speed = Mathf.RoundToInt(playerRb.velocity.magnitude * 3.6f);
         speedometerText.SetText("Speed: " + speed + " kmh");
+
+        rpm = (speed % 30) * 40;
+        rpmText.SetText("RPM: " + rpm);
+        }
+    }
+
+    bool IsOnGround()
+    {
+        wheelsOnGround = 0;
+        foreach (WheelCollider wheel in allWheels)
+        {
+            if (wheel.isGrounded)
+            {
+                wheelsOnGround++;
+            }
+        }
+        if (wheelsOnGround == 4)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
