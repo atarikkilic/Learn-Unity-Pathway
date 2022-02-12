@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
     [SerializeField] private float horsePower = 0;
     [SerializeField] GameObject centerOfMass;
+    [SerializeField] TextMeshProUGUI speedometerText;
+    [SerializeField] float speed;
     // add a speed variable for vehicle, we can change the vehicle's speed
 
     //[SerializeField] private const float speed = 20.0f;
@@ -51,7 +54,8 @@ public class PlayerController : MonoBehaviour
         // Rotates the car based on horizontal input
 
         transform.Rotate(Vector3.up, Time.deltaTime * turnSpeed * horizontalInput);
-
-
+        
+        speed = Mathf.RoundToInt(playerRb.velocity.magnitude * 3.6f);
+        speedometerText.SetText("Speed: " + speed + " kmh");
     }
 }
