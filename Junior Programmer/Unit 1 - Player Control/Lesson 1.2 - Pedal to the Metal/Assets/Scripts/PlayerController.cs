@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private Rigidbody playerRb;
+    [SerializeField] private float horsePower = 0;
     // add a speed variable for vehicle, we can change the vehicle's speed
-    
-    [SerializeField] private const float speed = 20.0f;
+
+    //[SerializeField] private const float speed = 20.0f;
 
     // Create the turnSpeed variable
     [SerializeField] private float turnSpeed = 45.0f;
@@ -20,7 +22,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerRb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -39,7 +41,8 @@ public class PlayerController : MonoBehaviour
 
         // Moves the car forward based on vertical input
 
-        transform.Translate(Vector3.forward * Time.deltaTime * speed * verticalInput);
+        playerRb.AddRelativeForce(Vector3.forward * horsePower * verticalInput);
+        //transform.Translate(Vector3.forward * Time.deltaTime * speed * verticalInput);
 
         //transform.Translate(Vector3.right * Time.deltaTime * turnSpeed * horizontalInput);
 
