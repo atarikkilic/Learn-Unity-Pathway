@@ -6,10 +6,10 @@ public class PlayerController : MonoBehaviour
 {
     // add a speed variable for vehicle, we can change the vehicle's speed
     
-    private float speed = 20.0f;
+    [SerializeField] private const float speed = 20.0f;
 
     // Create the turnSpeed variable
-    private float turnSpeed = 45.0f;
+    [SerializeField] private float turnSpeed = 45.0f;
 
     // Create the horizontal input variable for direction
     private float horizontalInput;

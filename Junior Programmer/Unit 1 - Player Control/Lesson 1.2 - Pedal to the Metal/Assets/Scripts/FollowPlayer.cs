@@ -8,7 +8,7 @@ public class FollowPlayer : MonoBehaviour
     public GameObject player;
 
     // create a variable for accessing the offset
-    private Vector3 offset = new Vector3(0.01f, 4.4f, -7.2f);
+    [SerializeField] private Vector3 offset = new Vector3(0.01f, 4.4f, -7.2f);
 
     // Start is called before the first frame update
     void Start()
