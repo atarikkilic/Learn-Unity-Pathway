@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
     [SerializeField] private float horsePower = 0;
+    [SerializeField] GameObject centerOfMass;
     // add a speed variable for vehicle, we can change the vehicle's speed
 
     //[SerializeField] private const float speed = 20.0f;
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
+        playerRb.centerOfMass = centerOfMass.transform.position;
     }
 
     // Update is called once per frame
