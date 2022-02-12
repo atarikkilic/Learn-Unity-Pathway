@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         // Get the axis that's horizontal  so we can get those left and right arrow keys
         horizontalInput = Input.GetAxis("Horizontal");
