@@ -26,7 +26,11 @@ public abstract class Unit : MonoBehaviour,
 
     private void Start()
     {
-
+        // Access the TeamColor variable from the Main scene to retrieve it
+        if (MainManager.Instance != null)
+        {
+            SetColor(MainManager.Instance.TeamColor);
+        }
     }
 
     void SetColor(Color c)
