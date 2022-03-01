@@ -31,11 +31,15 @@ public class OptimUnit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Profiler.BeginSample("Handling Time"); // begin profiling a piece of code with a custom label
         HandleTime();
+        Profiler.EndSample(); // ends the current profiling sample
 
         var t = transform;
 
-        if(transform.position.x <= 0)
+        Profiler.BeginSample("Rotating"); // begin profiling
+
+        if (transform.position.x <= 0)
             transform.Rotate(currentAngularVelocity * Time.deltaTime, 0, 0);
         else if(transform.position.x > 0)
             transform.Rotate(-currentAngularVelocity * Time.deltaTime, 0 ,0);
@@ -44,8 +48,17 @@ public class OptimUnit : MonoBehaviour
             transform.Rotate(0,0, currentAngularVelocity * Time.deltaTime);
         else if(transform.position.z < 0)
             transform.Rotate(0,0, -currentAngularVelocity * Time.deltaTime);
-        
+
+        Profiler.EndSample(); // end profiling
+
+        Profiler.BeginSample("Moving"); // begin profiling
+
         Move();
+
+        Profiler.EndSample(); // end profiling
+
+        Profiler.BeginSample("Boundary Check"); // begin profiling
+
 
         //check if we are moving away from the zone and invert velocity if this is the case
         if (transform.position.x > areaSize.x && currentVelocity.x > 0)
@@ -69,6 +82,8 @@ public class OptimUnit : MonoBehaviour
             currentVelocity.z *= -1;
             PickNewVelocityChangeTime();
         }
+
+        Profiler.EndSample(); // end profiling
     }
 
 
@@ -96,6 +111,11 @@ public class OptimUnit : MonoBehaviour
 
     void Move()
     {
+        transform.position = transform.position + currentVelocity * Time.deltaTime;
+    }
+    /*
+    void Move()
+    {
         Vector3 position = transform.position;
         
         float distanceToCenter = Vector3.Distance(Vector3.zero, position);
@@ -110,7 +130,7 @@ public class OptimUnit : MonoBehaviour
         
         transform.position = position;
     }
-
+    */
     private void HandleTime()
     {
         timeToVelocityChange -= Time.deltaTime;
